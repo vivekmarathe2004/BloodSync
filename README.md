@@ -1,41 +1,150 @@
-# BloodSync
+<h1 align="center">BloodSync</h1>
+<p align="center"><b>Role-Based Blood Donation Management Platform</b></p>
+<p align="center">Built for faster donor-hospital coordination, transparent operations, and safer blood availability tracking.</p>
 
-Production-style blood donation management platform with role-based dashboards for donors, hospitals, and admins.
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express-5.x-000000?logo=express&logoColor=white" alt="Express" />
+  <img src="https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white" alt="MySQL" />
+  <img src="https://img.shields.io/badge/Auth-JWT%20%2B%20bcrypt-F7B93E" alt="Auth" />
+  <img src="https://img.shields.io/badge/Architecture-MVC-0A66C2" alt="MVC" />
+  <img src="https://img.shields.io/badge/Frontend-HTML%2FCSS%2FVanilla%20JS-E34F26?logo=html5&logoColor=white" alt="Frontend" />
+</p>
 
-![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-5.x-000000?logo=express&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
-![JWT Auth](https://img.shields.io/badge/Auth-JWT-F7B93E)
-![Architecture](https://img.shields.io/badge/Pattern-MVC-0A66C2)
-![Frontend](https://img.shields.io/badge/Frontend-HTML%2FCSS%2FJS-E34F26?logo=html5&logoColor=white)
+<p align="center">
+  <a href="#problem--vision">Problem & Vision</a> |
+  <a href="#solution-overview">Solution</a> |
+  <a href="#feature-matrix">Features</a> |
+  <a href="#architecture">Architecture</a> |
+  <a href="#ui-screenshots">Screenshots</a>
+</p>
 
 ## Tags
-`#BloodDonation` `#HealthcareTech` `#FullStack` `#NodeJS` `#ExpressJS` `#MySQL` `#JWT` `#MVC` `#DashboardUI` `#CollegeMajorProject`
+`#BloodDonation` `#HealthcareTech` `#FullStack` `#NodeJS` `#ExpressJS` `#MySQL` `#JWT` `#MVC` `#DashboardUI` `#MajorProject`
 
-## Highlights
-- Secure authentication with JWT + HTTP-only cookies.
-- Role-based modules for Admin, Hospital, and Donor.
-- Donation requests, appointments, inventory updates, notifications, and analytics.
-- Public camp discovery and donor camp registration flow.
-- Export/report endpoints for admin and donor history.
+## Problem & Vision
+Hospitals need blood quickly, while donors need trustworthy, timely, and nearby opportunities to donate. Manual coordination causes delay, low visibility, and weak tracking.
+
+BloodSync addresses this by providing:
+- A real-time request workflow for hospitals
+- Actionable dashboards for donors and admins
+- Unified tracking of appointments, donations, camps, and stock
+
+## Solution Overview
+BloodSync is a multi-role platform where each actor gets a purpose-built interface:
+- Donor: respond to requests, schedule appointments, manage profile, track history
+- Hospital: raise urgent requests, manage stock, confirm donations, run camps
+- Admin: govern users, monitor activity, review reports, publish announcements
+- Public visitor: explore platform stats and upcoming donation camps
+
+## Feature Matrix
+| Capability | Public | Donor | Hospital | Admin |
+|---|---:|---:|---:|---:|
+| Register / Login | Yes | Yes | Yes | Yes |
+| Dashboard | No | Yes | Yes | Yes |
+| Blood Requests | View camps only | Respond | Create/Update | Monitor |
+| Appointments | No | Book/Reschedule/Cancel | Manage/Confirm | Monitor |
+| Notifications | No | Yes | Yes | Yes |
+| Inventory Tracking | No | No | Yes | Analytics |
+| Camp Management | View | Join | Create/Manage | Create/Manage |
+| Reports Export | No | History export | Stock export | System export |
+
+## End-to-End Workflows
+### 1) Emergency Request to Donation Completion
+1. Hospital creates blood request with urgency and location.
+2. Compatible donors receive visibility and respond.
+3. Donor books appointment slot.
+4. Hospital confirms appointment and verifies donation.
+5. Donation record is logged and history/report data updates.
+
+### 2) Camp Operations Flow
+1. Admin/Hospital creates donation camp.
+2. Donors register for upcoming camp.
+3. Organizer marks attendance and donation units.
+4. Camp analytics and donation records update.
+
+## Architecture
+```text
+Client (HTML/CSS/Vanilla JS)
+   -> Express Route Layer
+      -> Middleware (auth, role, validation, error handling)
+         -> Controllers (business logic)
+            -> Models (SQL operations)
+               -> MySQL
+```
+
+### Backend Design
+- Pattern: MVC with clear route/controller/model separation
+- Security middleware: auth guard + role guard
+- Validation: `express-validator` for request payload checks
+- Error handling: centralized middleware
+- Compatibility logic: blood-group matching utility
+
+## Data Model Snapshot
+Core entities implemented in schema:
+- Identity: `users`, `donors`, `hospitals`
+- Operations: `blood_requests`, `request_responses`, `appointments`, `donations`
+- Engagement: `notifications`, `announcements`, `donor_feedback`
+- Inventory: `blood_stock`, `stock_transactions`
+- Governance: `activity_logs`
+- Campaigns: `camps`, `camp_registrations`, `camp_attendance`, `camp_donations`
+
+### Seed Data Included
+- 1 admin user
+- 4 donor users
+- 2 hospital users
+- sample blood requests, stock, and activity logs
 
 ## Tech Stack
-- Frontend: HTML, CSS, Vanilla JS
-- Backend: Node.js + Express (MVC)
-- Database: MySQL
-- Charts: Chart.js
-- Auth: JWT + bcrypt
+| Layer | Stack |
+|---|---|
+| Frontend | HTML, CSS, Vanilla JavaScript |
+| Backend | Node.js, Express.js |
+| Database | MySQL (`mysql2`) |
+| Auth | JWT + bcrypt + cookie-parser |
+| Runtime Tools | nodemon, dotenv, cors |
 
-## Role Modules
-- Public: landing stats, live camps listing.
-- Donor: dashboard, profile, requests, appointments, camp registration, notifications, history.
-- Hospital: dashboard, blood requests, donor matching/history, stock inventory, appointments, camps, profile.
-- Admin: dashboard, user management, system requests/history/activity, camps, reports.
+## API Overview
+### Public + Auth
+- `GET /api/public/landing`
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/logout`
+- `GET /api/auth/me`
+
+### Donor
+- Dashboard, request response, appointment actions
+- Questionnaire and feedback submission
+- Notifications (single + mark all)
+- Profile updates and history export
+- Camps (upcoming, register, cancel, registrations)
+
+### Hospital
+- Profile and dashboard
+- Full request lifecycle (create/edit/status/cancel/clone/repost/duplicate)
+- Bulk messaging and announcements
+- Stock upsert, adjust, trends, transaction export
+- Donor history and donation confirmation
+- Camps management and attendance
+
+### Admin
+- Dashboard and user governance
+- Request/history/activity views
+- Reports export and system announcements
+- Stock trends and transaction export
+- Camps management and camps analytics
+
+## Security & Validation
+- Password hashing with bcrypt
+- JWT-based session handling
+- Role-based access control (`admin`, `donor`, `hospital`)
+- CORS with controlled origin handling
+- Input constraints for critical fields (blood groups, city options, rating range, units)
 
 ## Quick Start
 1. Copy `.env.example` to `.env`.
-2. Update database credentials in `.env`.
-3. Import schema:
+2. Set MySQL credentials in `.env`.
+3. Import DB schema:
 ```bash
 mysql -u root -p < server/database/schema.sql
 ```
@@ -43,7 +152,7 @@ mysql -u root -p < server/database/schema.sql
 ```bash
 npm install
 ```
-5. Start in development mode:
+5. Run development server:
 ```bash
 npm run dev
 ```
@@ -55,21 +164,16 @@ http://localhost:5000
 ## Environment Variables
 | Variable | Description | Example |
 |---|---|---|
-| `PORT` | Server port | `5000` |
-| `NODE_ENV` | Runtime mode | `development` |
-| `CLIENT_URL` | Client origin for CORS | `http://localhost:5000` |
+| `PORT` | Backend port | `5000` |
+| `NODE_ENV` | Environment mode | `development` |
+| `CLIENT_URL` | Allowed frontend origin | `http://localhost:5000` |
 | `JWT_SECRET` | JWT signing secret | `change_this_secret` |
-| `JWT_EXPIRES_IN` | JWT expiry window | `1d` |
+| `JWT_EXPIRES_IN` | JWT expiry time | `1d` |
 | `DB_HOST` | MySQL host | `localhost` |
 | `DB_USER` | MySQL user | `root` |
 | `DB_PASSWORD` | MySQL password | `your_password` |
 | `DB_NAME` | Database name | `blood_donation_db` |
 | `DB_PORT` | MySQL port | `3306` |
-
-## NPM Scripts
-- `npm run dev` -> start with `nodemon`
-- `npm start` -> start with `node`
-- `npm test` -> placeholder test script
 
 ## Project Structure
 ```text
@@ -81,66 +185,15 @@ client/
   assets/
 server/
   config/
+  constants/
   controllers/
+  database/
   middleware/
   models/
   routes/
-  database/
-README.md
 ```
 
-## API Endpoints
-### Auth + Public
-- `GET /api/public/landing`
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/auth/logout`
-- `GET /api/auth/me`
-
-### Donor
-- `GET /api/donor/dashboard`
-- `POST /api/donor/requests/:requestId/respond`
-- `GET /api/donor/appointments`
-- `POST /api/donor/appointments`
-- `PATCH /api/donor/appointments/:appointmentId/reschedule`
-- `PATCH /api/donor/appointments/:appointmentId/cancel`
-- `GET /api/donor/notifications`
-- `PATCH /api/donor/notifications/:notificationId/read`
-- `PATCH /api/donor/profile`
-- `GET /api/donor/history/export`
-- `GET /api/donor/certificate/:donationId`
-
-### Hospital
-- `GET /api/hospital/dashboard`
-- `GET /api/hospital/profile`
-- `PATCH /api/hospital/profile`
-- `POST /api/hospital/requests`
-- `PATCH /api/hospital/requests/:requestId`
-- `PATCH /api/hospital/requests/:requestId/status`
-- `POST /api/hospital/requests/:requestId/cancel`
-- `POST /api/hospital/requests/:requestId/clone`
-- `POST /api/hospital/requests/:requestId/repost`
-- `POST /api/hospital/requests/:requestId/duplicate`
-- `GET /api/hospital/requests`
-- `POST /api/hospital/bulk-message`
-- `POST /api/hospital/stock`
-- `GET /api/hospital/donors/:donorId/history`
-- `POST /api/hospital/donations/confirm`
-- `GET /api/hospital/appointments`
-- `PATCH /api/hospital/appointments/:appointmentId`
-- `POST /api/hospital/announcements`
-
-### Admin
-- `GET /api/admin/dashboard`
-- `DELETE /api/admin/users/:id`
-- `PATCH /api/admin/users/:id/status`
-- `GET /api/admin/requests`
-- `GET /api/admin/history`
-- `GET /api/admin/activity`
-- `GET /api/admin/reports/export`
-- `POST /api/admin/announcements`
-
-## Demo Credentials (seeded)
+## Demo Credentials (Seeded)
 - Admin: `admin@bloodsync.com` / `Password@123`
 - Donor: `donor1@mail.com` / `Password@123`
 - Hospital: `hosp1@mail.com` / `Password@123`
@@ -176,3 +229,16 @@ README.md
 ### Admin UI
 ![Admin Camps](docs/screenshots/admin-camps.png)
 ![Admin Users](docs/screenshots/admin-users.png)
+
+## Presentation Talking Points
+- Real-world relevance: emergency response + healthcare coordination
+- Complete lifecycle coverage: request -> donor action -> appointment -> donation -> reporting
+- Multi-role product thinking with scoped permissions
+- Structured backend engineering with maintainable MVC modules
+- Extensible foundation for geo-matching, ML prioritization, and mobile clients
+
+## Future Scope
+- Geospatial donor matching using distance + ETA
+- Notification channels via SMS/Email/WhatsApp
+- Predictive blood shortage analytics
+- Containerized deployment and CI test pipeline

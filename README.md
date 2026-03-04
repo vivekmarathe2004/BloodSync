@@ -68,3 +68,35 @@ Production-style college major project with modern SaaS dashboard UI.
 - Admin: `admin@bloodsync.com` / `Password@123`
 - Donor: `donor1@mail.com` / `Password@123`
 - Hospital: `hosp1@mail.com` / `Password@123`
+
+## UI Screenshots
+### Public
+<img src="./docs/screenshots/index.png" alt="Home" width="100%" />
+<img src="./docs/screenshots/camps.png" alt="Public Camps" width="100%" />
+<img src="./docs/screenshots/login.png" alt="Login" width="100%" />
+<img src="./docs/screenshots/register.png" alt="Register" width="100%" />
+
+### Dashboards
+<img src="./docs/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="100%" />
+<img src="./docs/screenshots/donor-dashboard.png" alt="Donor Dashboard" width="100%" />
+<img src="./docs/screenshots/hospital-dashboard.png" alt="Hospital Dashboard" width="100%" />
+
+### Donor UI
+<img src="./docs/screenshots/donor-appointments.png" alt="Donor Appointments" width="100%" />
+<img src="./docs/screenshots/donor-camps.png" alt="Donor Camps" width="100%" />
+<img src="./docs/screenshots/donor-history.png" alt="Donor History" width="100%" />
+<img src="./docs/screenshots/donor-notifications.png" alt="Donor Notifications" width="100%" />
+<img src="./docs/screenshots/donor-profile.png" alt="Donor Profile" width="100%" />
+<img src="./docs/screenshots/donor-requests.png" alt="Donor Requests" width="100%" />
+
+### Hospital UI
+<img src="./docs/screenshots/hospital-analytics.png" alt="Hospital Analytics" width="100%" />
+<img src="./docs/screenshots/hospital-appointments.png" alt="Hospital Appointments" width="100%" />
+<img src="./docs/screenshots/hospital-camps.png" alt="Hospital Camps" width="100%" />
+<img src="./docs/screenshots/hospital-inventory.png" alt="Hospital Inventory" width="100%" />
+<img src="./docs/screenshots/hospital-profile.png" alt="Hospital Profile" width="100%" />
+<img src="./docs/screenshots/hospital-requests.png" alt="Hospital Requests" width="100%" />
+
+### Admin UI
+<img src="./docs/screenshots/admin-camps.png" alt="Admin Camps" width="100%" />
+<img src="./docs/screenshots/admin-users.png" alt="Admin Users" width="100%" />

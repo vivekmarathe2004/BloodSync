@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Camps | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Camp Registration</h1>
+            <p class="meta">Register for upcoming camps and track your registrations.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+        <section class="section">
+          <h3 class="h3">Upcoming Camps</h3>
+          <div id="upcomingDonorCamps" class="grid-3" style="margin-top:16px;"></div>
+        </section>
+        <section class="section">
+          <h3 class="h3">My Camp Registrations</h3>
+          <div class="table-wrap" style="margin-top:16px;">
+            <table>
+              <thead><tr><th>Camp</th><th>Date</th><th>Location</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="myCampRegistrations"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/assets/js/donor-camps.js"></script>
+  </body>
+</html>

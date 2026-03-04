@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Admin Dashboard</h1>
+            <p class="meta">Platform analytics and user management</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section id="dashboardTab" class="tab-content">
+          <section class="grid-4">
+            <article class="glass-card card stat"><div class="meta">Users</div><div id="usersStat" class="value">0</div></article>
+            <article class="glass-card card stat"><div class="meta">Donors</div><div id="donorsStat" class="value">0</div></article>
+            <article class="glass-card card stat"><div class="meta">Hospitals</div><div id="hospitalsStat" class="value">0</div></article>
+            <article class="glass-card card stat"><div class="meta">Requests</div><div id="requestsStat" class="value">0</div></article>
+          </section>
+
+          <section class="section admin-analytics-grid">
+            <article class="glass-card card compact-card">
+              <h3 class="h3">Blood Group Distribution</h3>
+              <div class="chart-compact"><canvas id="bloodChart" height="56"></canvas></div>
+            </article>
+            <article class="glass-card card compact-card">
+              <h3 class="h3">City Distribution</h3>
+              <div class="chart-compact"><canvas id="cityChart" height="56"></canvas></div>
+            </article>
+            <article class="glass-card card compact-card">
+              <h3 class="h3">Quick Insights</h3>
+              <div id="dashboardInsights" class="admin-insights"></div>
+            </article>
+          </section>
+
+          <section class="section">
+            <article class="glass-card card">
+              <div class="topbar">
+                <h3 class="h3">User Management</h3>
+                <div class="btn-group">
+                  <button id="openAddAdminModal" class="btn btn-primary">Add Admin</button>
+                  <input id="searchInput" placeholder="Search users..." />
+                  <select id="roleFilter">
+                    <option value="all">All Roles</option>
+                    <option value="donor">Donor</option>
+                    <option value="hospital">Hospital</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+              </div>
+              <div class="btn-group" style="margin-bottom: 12px;">
+                <button id="bulkSuspendBtn" class="btn btn-secondary">Suspend Selected</button>
+                <button id="bulkActivateBtn" class="btn btn-secondary">Activate Selected</button>
+                <button id="bulkDeleteBtn" class="btn btn-danger">Delete Selected</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th><input id="selectAllUsers" type="checkbox" /></th><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>City</th><th>Actions</th></tr></thead>
+                  <tbody id="usersBody"></tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+        </section>
+
+        <section id="requestsTab" class="tab-content" style="display: none;">
+          <article class="glass-card card">
+            <h3 class="h3">Blood Requests Management</h3>
+            <p class="meta">View and manage all blood donation requests across hospitals.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Hospital</th><th>Blood Group</th><th>Units</th><th>Urgency</th><th>City</th><th>Status</th><th>Date</th></tr></thead>
+                <tbody id="requestsBody">
+                  <tr><td colspan="7" class="text-center">Loading requests...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section id="historyTab" class="tab-content" style="display: none;">
+          <article class="glass-card card">
+            <h3 class="h3">Donation History</h3>
+            <p class="meta">Complete history of all blood donations in the system.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Donor Name</th><th>Hospital</th><th>Blood Group</th><th>Donation Date</th><th>Status</th></tr></thead>
+                <tbody id="historyBody">
+                  <tr><td colspan="5" class="text-center">Loading donation history...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section id="activityTab" class="tab-content" style="display: none;">
+          <article class="glass-card card">
+            <div class="topbar">
+              <h3 class="h3">System Activity Timeline</h3>
+              <div class="btn-group">
+                <input id="activitySearchInput" placeholder="Filter by action or actor..." />
+                <button id="refreshActivityBtn" class="btn btn-secondary">Refresh</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Time</th><th>Actor</th><th>Action</th><th>Entity</th><th>Details</th></tr></thead>
+                <tbody id="activityBody">
+                  <tr><td colspan="5" class="text-center">Loading activity...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section id="settingsTab" class="tab-content" style="display: none;">
+          <article class="glass-card card">
+            <h3 class="h3">Admin Settings</h3>
+            <p class="meta">Manage system settings and preferences.</p>
+            <div class="grid-2">
+              <div>
+                <h4 class="h4">System Information</h4>
+                <div class="meta">
+                  <p><strong>Version:</strong> 1.0.0</p>
+                  <p><strong>Database:</strong> MySQL</p>
+                  <p><strong>Environment:</strong> Development</p>
+                </div>
+              </div>
+              <div>
+                <h4 class="h4">Quick Actions</h4>
+                <div class="btn-group">
+                  <button id="refreshDashboardBtn" class="btn btn-secondary">Refresh Dashboard</button>
+                  <button id="saveSettingsBtn" class="btn btn-secondary">Save Settings</button>
+                  <button id="exportSystemStockTxBtn" class="btn btn-secondary">Export Stock CSV</button>
+                </div>
+              </div>
+            </div>
+            <section class="section" style="padding-bottom:0;">
+              <h4 class="h4">System Stock Trend (Net Daily Change)</h4>
+              <canvas id="adminStockTrendChart" height="80"></canvas>
+            </section>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div id="deleteModal" class="modal">
+      <div class="modal-content glass-card">
+        <h3 class="h3">Confirm Soft Delete</h3>
+        <p class="meta">This will deactivate the user and hide account access.</p>
+        <div class="btn-group">
+          <button id="confirmDelete" class="btn btn-danger">Delete User</button>
+          <button id="cancelDelete" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="addAdminModal" class="modal">
+      <div class="modal-content glass-card">
+        <div class="topbar">
+          <h3 class="h3">Add Admin</h3>
+          <button id="closeAddAdminModal" class="btn btn-secondary">Close</button>
+        </div>
+        <form id="addAdminForm">
+          <div class="grid-2">
+            <div class="form-group"><label>Name</label><input name="name" required /></div>
+            <div class="form-group"><label>Email</label><input name="email" type="email" required /></div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Password</label><input name="password" type="password" minlength="8" required /></div>
+            <div class="form-group">
+              <label>Role Type</label>
+              <select name="role" required>
+                <option value="admin">Admin</option>
+                <option value="super_admin">Super Admin</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Phone</label><input name="phone" /></div>
+            <div class="form-group"><label>City</label>
+              <select name="city">
+                <option value="">Select City</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Pune">Pune</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Dhule">Dhule</option>
+                <option value="Jalgoan">Jalgoan</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>State</label><input name="state" /></div>
+          <button class="btn btn-primary" type="submit">Create Admin</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="roleModal" class="modal">
+      <div class="modal-content glass-card">
+        <div class="topbar">
+          <h3 class="h3">Change User Role</h3>
+          <button id="closeRoleModal" class="btn btn-secondary">Close</button>
+        </div>
+        <form id="changeRoleForm">
+          <input id="roleUserId" name="userId" type="hidden" />
+          <div class="form-group">
+            <label>Role</label>
+            <select name="role" id="nextRole" required>
+              <option value="donor">Donor</option>
+              <option value="hospital">Hospital</option>
+            </select>
+          </div>
+          <div id="donorFields">
+            <div class="grid-2">
+              <div class="form-group"><label>Blood Group</label>
+                <select name="bloodGroup">
+                  <option value="">Select</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+              <div class="form-group"><label>Age</label><input name="age" type="number" min="18" /></div>
+            </div>
+            <div class="form-group"><label>Gender</label><input name="gender" placeholder="male/female/other" /></div>
+          </div>
+          <div id="hospitalFields" style="display:none;">
+            <div class="form-group"><label>Hospital Name</label><input name="hospitalName" /></div>
+            <div class="form-group"><label>Address</label><input name="address" /></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Update Role</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="userInfoModal" class="modal">
+      <div class="modal-content glass-card">
+        <div class="topbar">
+          <h3 class="h3">User Details</h3>
+          <button id="closeUserInfoModal" class="btn btn-secondary">Close</button>
+        </div>
+        <div id="userInfoCard" class="meta"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/assets/js/admin.js"></script>
+  </body>
+  </html>

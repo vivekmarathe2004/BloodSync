@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="auth">
+      <section class="auth-left">
+        <h1 class="h1">Join The Life Saver Network</h1>
+        <p>Role-based registration with validation and eligibility tracking.</p>
+      </section>
+      <section class="auth-right">
+        <form id="authForm" class="auth-form glass-card" data-mode="register">
+          <h2 class="h2">Create Account</h2>
+          <div class="form-group"><input name="name" placeholder="Full Name" required /></div>
+          <div class="form-group"><input id="email" name="email" type="email" placeholder="Email" required /><span id="emailError" class="error"></span></div>
+          <div class="form-group">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input id="password" name="password" type="password" placeholder="Password" required />
+              <button id="passwordToggleBtn" class="btn btn-secondary" type="button">Show</button>
+            </div>
+            <span id="passwordError" class="error"></span>
+          </div>
+          <div class="form-group">
+            <div style="height:8px;background:#edf1f7;border-radius:999px;overflow:hidden;">
+              <div id="meterBar" style="height:100%;width:0%;background:#e63946;"></div>
+            </div>
+            <span id="meterLabel" class="helper">Strength</span>
+          </div>
+          <div class="form-group"><input name="phone" placeholder="Phone" required /></div>
+          <div class="form-group">
+            <select name="city" required>
+              <option value="">Select City</option>
+              <option value="Nashik">Nashik</option>
+              <option value="Pune">Pune</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Dhule">Dhule</option>
+              <option value="Jalgoan">Jalgoan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select name="role" required>
+              <option value="donor">Donor</option>
+              <option value="hospital">Hospital</option>
+            </select>
+          </div>
+          <div id="donorFields">
+            <div class="grid-2">
+              <div class="form-group">
+                <select name="bloodGroup">
+                  <option value="">Select Blood Group</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+              <div class="form-group"><input name="age" type="number" placeholder="Age" min="18" max="65" /></div>
+            </div>
+            <div class="form-group">
+              <select name="gender">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="hospitalFields">
+            <div class="form-group"><input name="hospitalName" placeholder="Hospital Name" /></div>
+            <div class="form-group"><input name="address" placeholder="Hospital Address" /></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Create Account</button>
+          <p class="meta">Already registered? <a href="/pages/login.html">Login</a></p>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="/assets/js/auth.js"></script>
+  </body>
+  </html>

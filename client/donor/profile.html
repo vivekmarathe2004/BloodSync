@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Profile | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Donor Profile</h1>
+            <p class="meta">Manage profile and track engagement.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Profile Management</h3>
+            <form id="profileForm" style="margin-top:12px;">
+              <div class="grid-3">
+                <div class="form-group"><label>Name</label><input id="profileName" disabled /></div>
+                <div class="form-group"><label>Blood Group (Locked)</label><input id="profileBloodGroup" disabled /></div>
+                <div class="form-group"><label>Weight (kg)</label><input id="profileWeight" name="weightKg" type="number" min="35" max="250" /></div>
+              </div>
+              <div class="grid-3">
+                <div class="form-group"><label>Phone</label><input id="profilePhone" name="phone" /></div>
+                <div class="form-group"><label>City</label>
+                  <select id="profileCity" name="city">
+                    <option value="">Select City</option>
+                    <option value="Nashik">Nashik</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Dhule">Dhule</option>
+                    <option value="Jalgoan">Jalgoan</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Preferred Location</label><input id="preferredLocation" name="preferredLocation" /></div>
+              </div>
+              <div class="grid-3">
+                <div class="form-group"><label>Max Travel Distance (km)</label><input id="maxTravelKm" name="maxTravelKm" type="number" min="1" max="300" /></div>
+                <div class="form-group"><label>Profile Photo URL</label><input id="profilePhotoUrl" name="profilePhotoUrl" /></div>
+                <div class="form-group"><label>Health Notes</label><input id="healthInfo" name="healthInfo" /></div>
+              </div>
+              <button class="btn btn-primary" type="submit">Save Profile</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Engagement</h3>
+            <div class="grid-3" style="margin-top:12px;">
+              <div><p class="meta">Goal Progress</p><p class="meta"><strong id="goalProgress">0/3</strong></p></div>
+              <div><p class="meta">Monthly Top Donor</p><p class="meta"><strong id="monthlyTopDonor">N/A</strong></p></div>
+              <div><p class="meta">Badges</p><p id="badgeList" class="meta">-</p></div>
+            </div>
+            <div style="margin-top:12px;">
+              <p class="meta"><strong>Leaderboard</strong></p>
+              <div id="leaderboardList" class="meta"></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/assets/js/donor-profile.js"></script>
+  </body>
+  </html>

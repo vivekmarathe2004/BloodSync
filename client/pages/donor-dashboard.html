@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Dashboard | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Donor Dashboard</h1>
+            <p class="meta">Track eligibility, nearby requests, and donation history</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="grid-3">
+          <article class="glass-card card stat"><div class="meta">Total Donations</div><div id="totalDonations" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Total Units Donated</div><div id="totalUnits" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Donation Streak</div><div id="donationStreak" class="value">0</div></article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Eligibility</h3>
+            <p class="meta"><strong id="eligibility">-</strong></p>
+            <p class="meta">Available in <strong id="nextEligible">0 days</strong></p>
+            <p class="meta">Next date: <strong id="nextEligibleDate">-</strong></p>
+            <p class="meta">Last donation: <strong id="lastDonationDate">-</strong></p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="topbar">
+            <h2 class="h2">Nearby Blood Requests</h2>
+            <div class="btn-group">
+              <select id="filterBloodGroup">
+                <option value="">All Groups</option>
+                <option value="A+">A+</option><option value="A-">A-</option>
+                <option value="B+">B+</option><option value="B-">B-</option>
+                <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                <option value="O+">O+</option><option value="O-">O-</option>
+              </select>
+              <input id="filterDistanceKm" type="number" min="1" max="300" placeholder="Max km" />
+              <label class="meta"><input id="sortUrgency" type="checkbox" /> Sort urgency</label>
+              <button id="applyRequestFilters" class="btn btn-secondary" type="button">Apply</button>
+            </div>
+          </div>
+          <div id="requestsGrid" class="grid-3"></div>
+        </section>
+
+      </main>
+    </div>
+    <script type="module" src="/assets/js/donor.js"></script>
+  </body>
+  </html>

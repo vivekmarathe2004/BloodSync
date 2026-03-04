@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Analytics | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body data-page="analytics">
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Analytics</h1>
+            <p class="meta">Demand distribution, trends, and urgent attention panel.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="grid-3">
+          <article class="glass-card card stat"><div class="meta">Active Requests</div><div id="anaActiveRequests" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Total Donations Received</div><div id="anaTotalDonations" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Monthly Units Collected</div><div id="anaMonthlyUnits" class="value">0</div></article>
+        </section>
+        <section class="grid-2" style="margin-top:16px;">
+          <article class="glass-card card stat"><div class="meta">Emergency Requests</div><div id="anaEmergency" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Fulfillment</div><div id="anaFulfillment" class="value">0%</div></article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Urgent Attention</h3>
+            <div id="urgentAttentionPanel" style="margin-top:10px;"></div>
+          </article>
+        </section>
+
+        <section class="section grid-2">
+          <article class="glass-card card">
+            <h3 class="h3">Blood Group Demand</h3>
+            <canvas id="hospitalDemandChart" height="120"></canvas>
+          </article>
+          <article class="glass-card card">
+            <h3 class="h3">Donation Trend</h3>
+            <canvas id="hospitalDonationTrendChart" height="120"></canvas>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/assets/js/hospital-sections.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Appointments | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body data-page="appointments">
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Appointments</h1>
+            <p class="meta">Monitor and update donor appointment statuses.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Booked Appointments</h3>
+            <div class="table-wrap" style="margin-top:16px;">
+              <table>
+                <thead><tr><th>ID</th><th>Donor</th><th>Group</th><th>City</th><th>Slot</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead>
+                <tbody id="hospitalAppointmentsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <div id="rescheduleAppointmentModal" class="modal">
+      <div class="modal-content glass-card">
+        <div class="topbar">
+          <h3 class="h3">Reschedule Appointment</h3>
+          <button id="closeRescheduleAppointmentModal" class="btn btn-secondary">Close</button>
+        </div>
+        <form id="rescheduleAppointmentForm">
+          <input type="hidden" id="rescheduleAppointmentId" name="appointmentId" />
+          <div class="form-group">
+            <label>New Slot</label>
+            <input id="rescheduleSlotAt" name="slotAt" type="datetime-local" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Save New Slot</button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="/assets/js/hospital-sections.js"></script>
+  </body>
+</html>

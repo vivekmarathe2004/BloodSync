@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor History | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Donation History</h1>
+            <p class="meta">Filter, export, and view certificates.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="section">
+          <article class="glass-card card">
+            <div class="topbar">
+              <h3 class="h3">History</h3>
+              <div class="btn-group">
+                <input id="searchHistory" placeholder="Search city, blood group, hospital" />
+                <input id="historyDateFrom" type="date" />
+                <input id="historyDateTo" type="date" />
+                <button id="applyHistoryFilters" class="btn btn-secondary" type="button">Apply</button>
+                <button id="exportHistoryBtn" class="btn btn-secondary" type="button">Download CSV</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>ID</th><th>Blood Group</th><th>City</th><th>Hospital</th><th>Date</th><th>Status</th><th>Certificate</th></tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+              </table>
+            </div>
+            <div class="btn-group" style="margin-top:16px;">
+              <button id="prevPage" class="btn btn-secondary">Previous</button>
+              <button id="nextPage" class="btn btn-secondary">Next</button>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/assets/js/donor-history.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Dashboard | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body data-page="dashboard">
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2" id="dashHospitalName">Hospital</h1>
+            <p class="meta">Overview and quick navigation to module pages.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="grid-3">
+          <article class="glass-card card stat">
+            <div class="meta">Active Requests</div>
+            <div id="dashActiveRequests" class="value">0</div>
+          </article>
+          <article class="glass-card card stat">
+            <div class="meta">Emergency Requests</div>
+            <div id="dashEmergency" class="value">0</div>
+          </article>
+          <article class="glass-card card stat">
+            <div class="meta">Low Stock Alerts</div>
+            <div id="dashLowStock" class="value">0</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="grid-3">
+            <a id="dashRequestsLink" class="glass-card card" href="/hospital/requests.html">
+              <h3 class="h3">Requests</h3>
+              <p class="meta" style="margin-top:8px;">Create, track, and update blood requests.</p>
+            </a>
+            <a id="dashAppointmentsLink" class="glass-card card" href="/hospital/appointments.html">
+              <h3 class="h3">Appointments</h3>
+              <p class="meta" style="margin-top:8px;">Manage donor appointments and statuses.</p>
+            </a>
+            <a id="dashInventoryLink" class="glass-card card" href="/hospital/inventory.html">
+              <h3 class="h3">Inventory</h3>
+              <p class="meta" style="margin-top:8px;">Track stock, adjustments, and low alerts.</p>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/assets/js/hospital-sections.js"></script>
+  </body>
+</html>

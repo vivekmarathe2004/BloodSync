@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Camps | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body data-role="admin">
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Camp Management</h1>
+            <p class="meta">Create camps, mark attendance, and track analytics.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="grid-4">
+          <article class="glass-card card stat"><div class="meta">Total Camps</div><div id="statTotalCamps" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Units Collected</div><div id="statUnits" class="value">0</div></article>
+          <article class="glass-card card stat"><div class="meta">Top Location</div><div id="statLocation" class="value">-</div></article>
+          <article class="glass-card card stat"><div class="meta">Avg Attendance</div><div id="statAttendance" class="value">0%</div></article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Create Camp</h3>
+            <form id="createCampForm" style="margin-top:16px;">
+              <div class="grid-2">
+                <div class="form-group"><label>Camp Name</label><input name="campName" required /></div>
+                <div class="form-group"><label>Location</label><input name="location" required /></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group"><label>Start Date</label><input name="startDate" type="date" required /></div>
+                <div class="form-group"><label>End Date</label><input name="endDate" type="date" required /></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group"><label>Expected Donors</label><input name="expectedDonors" type="number" min="0" value="0" /></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group"><label>Start Time</label><input name="startTime" type="time" required /></div>
+                <div class="form-group"><label>End Time</label><input name="endTime" type="time" required /></div>
+              </div>
+              <div class="form-group"><label>Description</label><input name="description" /></div>
+              <button class="btn btn-primary" type="submit">Create Camp</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Managed Camps</h3>
+            <div class="table-wrap" style="margin-top:16px;">
+              <table>
+                <thead><tr><th>Camp</th><th>Date</th><th>Status</th><th>Location</th><th>Organizer</th><th>Actions</th></tr></thead>
+                <tbody id="managedCampsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Camp Dashboard</h3>
+            <p id="selectedCampMeta" class="meta">Select a camp.</p>
+            <div id="campMetrics" class="grid-4" style="margin-top:12px;"></div>
+            <div class="table-wrap" style="margin-top:16px;">
+              <table>
+                <thead><tr><th>Name</th><th>Email</th><th>Reg Status</th><th>Arrived</th><th>Donated</th><th>Units</th><th>Mark</th></tr></thead>
+                <tbody id="campDonorsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div id="editCampModal" class="modal">
+      <div class="modal-content glass-card">
+        <div class="topbar">
+          <h3 class="h3">Edit Camp</h3>
+          <button id="closeEditCampModal" class="btn btn-secondary">Close</button>
+        </div>
+        <form id="editCampForm">
+          <input id="editCampId" name="campId" type="hidden" />
+          <div class="grid-2">
+            <div class="form-group"><label>Camp Name</label><input id="editCampName" name="campName" required /></div>
+            <div class="form-group"><label>Location</label><input id="editLocation" name="location" required /></div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Start Date</label><input id="editStartDate" name="startDate" type="date" required /></div>
+            <div class="form-group"><label>End Date</label><input id="editEndDate" name="endDate" type="date" required /></div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Expected Donors</label><input id="editExpectedDonors" name="expectedDonors" type="number" min="0" /></div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Start Time</label><input id="editStartTime" name="startTime" type="time" required /></div>
+            <div class="form-group"><label>End Time</label><input id="editEndTime" name="endTime" type="time" required /></div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Status</label>
+              <select id="editStatus" name="status">
+                <option value="upcoming">upcoming</option>
+                <option value="ongoing">ongoing</option>
+                <option value="completed">completed</option>
+                <option value="cancelled">cancelled</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Description</label><input id="editDescription" name="description" /></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="deleteCampModal" class="modal">
+      <div class="modal-content glass-card">
+        <div class="topbar">
+          <h3 class="h3">Confirm Delete</h3>
+          <button id="closeDeleteCampModal" class="btn btn-secondary">Close</button>
+        </div>
+        <p class="meta" style="margin:12px 0 18px;">This will cancel the camp and remove it from active listings. Continue?</p>
+        <div class="btn-group">
+          <button id="confirmDeleteCampBtn" class="btn btn-danger" type="button">Delete Camp</button>
+          <button id="cancelDeleteCampBtn" class="btn btn-secondary" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/assets/js/camps-manager.js"></script>
+  </body>
+</html>

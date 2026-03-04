@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Requests | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body data-page="requests">
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Blood Requests</h1>
+            <p class="meta">Create and manage request workflow.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">Create Request</h3>
+            <form id="hospitalCreateRequestForm" style="margin-top:16px;">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Blood Group</label>
+                  <select name="bloodGroup" required>
+                    <option value="">Select</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Units</label><input name="units" type="number" min="1" required /></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Urgency</label>
+                  <select name="urgency"><option value="normal">normal</option><option value="urgent">urgent</option><option value="critical">critical</option></select>
+                </div>
+                <div class="form-group"><label>City</label><input name="city" required /></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group"><label>Required By</label><input name="requiredByDate" type="datetime-local" /></div>
+                <div class="form-group"><label>Request Type</label><select name="requestType"><option value="normal">normal</option><option value="emergency">emergency</option></select></div>
+              </div>
+              <div class="form-group"><label>Notes</label><input name="notes" /></div>
+              <button class="btn btn-primary" type="submit">Create Request</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <h3 class="h3">My Requests</h3>
+            <div class="table-wrap" style="margin-top:16px;">
+              <table>
+                <thead><tr><th>ID</th><th>Group</th><th>Units</th><th>Urgency</th><th>City</th><th>Status</th><th>Required By</th><th>Notes</th><th>Actions</th></tr></thead>
+                <tbody id="hospitalRequestsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/assets/js/hospital-sections.js"></script>
+  </body>
+</html>

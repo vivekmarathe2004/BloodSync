@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Inventory | BloodSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body data-page="inventory">
+    <div class="dashboard">
+      <div id="sidebarMount"></div>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="h2">Inventory Management</h1>
+            <p class="meta">Stock levels, low alerts, and transactions.</p>
+          </div>
+          <button id="menuToggle" class="btn btn-secondary mobile-only">Menu</button>
+        </header>
+
+        <section class="grid-2">
+          <article class="glass-card card">
+            <h3 class="h3">Current Stock</h3>
+            <div id="hospitalLowStockAlerts" style="margin-top:12px;"></div>
+            <div class="table-wrap" style="margin-top:16px;">
+              <table>
+                <thead><tr><th>Blood Group</th><th>Units</th><th>Threshold</th><th>Status</th></tr></thead>
+                <tbody id="hospitalStockBody"></tbody>
+              </table>
+            </div>
+          </article>
+          <article class="glass-card card">
+            <h3 class="h3">Adjust Stock</h3>
+            <form id="hospitalStockAdjustForm" style="margin-top:16px;">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label>Blood Group</label>
+                  <select name="bloodGroup" required>
+                    <option value="">Select</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Delta Units (+/-)</label><input name="deltaUnits" type="number" required /></div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group"><label>Threshold Units</label><input name="thresholdUnits" type="number" min="0" value="5" /></div>
+                <div class="form-group"><label>Notes</label><input name="notesText" /></div>
+              </div>
+              <button class="btn btn-primary" type="submit">Apply</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="section">
+          <article class="glass-card card">
+            <div class="topbar">
+              <h3 class="h3">Stock Transactions</h3>
+              <button id="hospitalExportStockBtn" class="btn btn-secondary">Export CSV</button>
+            </div>
+            <div class="table-wrap" style="margin-top:16px;">
+              <table>
+                <thead><tr><th>Time</th><th>Group</th><th>Action</th><th>Changed</th><th>Before</th><th>After</th><th>Notes</th></tr></thead>
+                <tbody id="hospitalStockTxBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/assets/js/hospital-sections.js"></script>
+  </body>
+</html>

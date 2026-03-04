@@ -1,6 +1,23 @@
-# BloodSync - Blood Donation Management System
+# BloodSync
 
-Production-style college major project with modern SaaS dashboard UI.
+Production-style blood donation management platform with role-based dashboards for donors, hospitals, and admins.
+
+![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-5.x-000000?logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
+![JWT Auth](https://img.shields.io/badge/Auth-JWT-F7B93E)
+![Architecture](https://img.shields.io/badge/Pattern-MVC-0A66C2)
+![Frontend](https://img.shields.io/badge/Frontend-HTML%2FCSS%2FJS-E34F26?logo=html5&logoColor=white)
+
+## Tags
+`#BloodDonation` `#HealthcareTech` `#FullStack` `#NodeJS` `#ExpressJS` `#MySQL` `#JWT` `#MVC` `#DashboardUI` `#CollegeMajorProject`
+
+## Highlights
+- Secure authentication with JWT + HTTP-only cookies.
+- Role-based modules for Admin, Hospital, and Donor.
+- Donation requests, appointments, inventory updates, notifications, and analytics.
+- Public camp discovery and donor camp registration flow.
+- Export/report endpoints for admin and donor history.
 
 ## Tech Stack
 - Frontend: HTML, CSS, Vanilla JS
@@ -9,25 +26,80 @@ Production-style college major project with modern SaaS dashboard UI.
 - Charts: Chart.js
 - Auth: JWT + bcrypt
 
-## Run
-1. Copy `.env.example` to `.env` and update DB credentials.
-2. Import schema: `mysql -u root -p < server/database/schema.sql`
-3. Install: `npm install`
-4. Start: `npm run dev`
-5. Open: `http://localhost:5000`
+## Role Modules
+- Public: landing stats, live camps listing.
+- Donor: dashboard, profile, requests, appointments, camp registration, notifications, history.
+- Hospital: dashboard, blood requests, donor matching/history, stock inventory, appointments, camps, profile.
+- Admin: dashboard, user management, system requests/history/activity, camps, reports.
+
+## Quick Start
+1. Copy `.env.example` to `.env`.
+2. Update database credentials in `.env`.
+3. Import schema:
+```bash
+mysql -u root -p < server/database/schema.sql
+```
+4. Install dependencies:
+```bash
+npm install
+```
+5. Start in development mode:
+```bash
+npm run dev
+```
+6. Open:
+```text
+http://localhost:5000
+```
+
+## Environment Variables
+| Variable | Description | Example |
+|---|---|---|
+| `PORT` | Server port | `5000` |
+| `NODE_ENV` | Runtime mode | `development` |
+| `CLIENT_URL` | Client origin for CORS | `http://localhost:5000` |
+| `JWT_SECRET` | JWT signing secret | `change_this_secret` |
+| `JWT_EXPIRES_IN` | JWT expiry window | `1d` |
+| `DB_HOST` | MySQL host | `localhost` |
+| `DB_USER` | MySQL user | `root` |
+| `DB_PASSWORD` | MySQL password | `your_password` |
+| `DB_NAME` | Database name | `blood_donation_db` |
+| `DB_PORT` | MySQL port | `3306` |
+
+## NPM Scripts
+- `npm run dev` -> start with `nodemon`
+- `npm start` -> start with `node`
+- `npm test` -> placeholder test script
 
 ## Project Structure
-- `client/` frontend pages, reusable UI modules, shared design system CSS.
-- `server/` Express MVC backend.
+```text
+client/
+  admin/
+  donor/
+  hospital/
+  pages/
+  assets/
+server/
+  config/
+  controllers/
+  middleware/
+  models/
+  routes/
+  database/
+README.md
+```
 
 ## API Endpoints
+### Auth + Public
 - `GET /api/public/landing`
 - `POST /api/auth/register`
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
+
+### Donor
 - `GET /api/donor/dashboard`
-- `POST /api/donor/requests/:requestId/respond` (accept/decline)
+- `POST /api/donor/requests/:requestId/respond`
 - `GET /api/donor/appointments`
 - `POST /api/donor/appointments`
 - `PATCH /api/donor/appointments/:appointmentId/reschedule`
@@ -37,6 +109,8 @@ Production-style college major project with modern SaaS dashboard UI.
 - `PATCH /api/donor/profile`
 - `GET /api/donor/history/export`
 - `GET /api/donor/certificate/:donationId`
+
+### Hospital
 - `GET /api/hospital/dashboard`
 - `GET /api/hospital/profile`
 - `PATCH /api/hospital/profile`
@@ -55,9 +129,11 @@ Production-style college major project with modern SaaS dashboard UI.
 - `GET /api/hospital/appointments`
 - `PATCH /api/hospital/appointments/:appointmentId`
 - `POST /api/hospital/announcements`
+
+### Admin
 - `GET /api/admin/dashboard`
 - `DELETE /api/admin/users/:id`
-- `PATCH /api/admin/users/:id/status` (ban/unban)
+- `PATCH /api/admin/users/:id/status`
 - `GET /api/admin/requests`
 - `GET /api/admin/history`
 - `GET /api/admin/activity`
@@ -71,32 +147,32 @@ Production-style college major project with modern SaaS dashboard UI.
 
 ## UI Screenshots
 ### Public
-<img src="./docs/screenshots/index.png" alt="Home" width="100%" />
-<img src="./docs/screenshots/camps.png" alt="Public Camps" width="100%" />
-<img src="./docs/screenshots/login.png" alt="Login" width="100%" />
-<img src="./docs/screenshots/register.png" alt="Register" width="100%" />
+![Home](docs/screenshots/index.png)
+![Public Camps](docs/screenshots/camps.png)
+![Login](docs/screenshots/login.png)
+![Register](docs/screenshots/register.png)
 
 ### Dashboards
-<img src="./docs/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="100%" />
-<img src="./docs/screenshots/donor-dashboard.png" alt="Donor Dashboard" width="100%" />
-<img src="./docs/screenshots/hospital-dashboard.png" alt="Hospital Dashboard" width="100%" />
+![Admin Dashboard](docs/screenshots/admin-dashboard.png)
+![Donor Dashboard](docs/screenshots/donor-dashboard.png)
+![Hospital Dashboard](docs/screenshots/hospital-dashboard.png)
 
 ### Donor UI
-<img src="./docs/screenshots/donor-appointments.png" alt="Donor Appointments" width="100%" />
-<img src="./docs/screenshots/donor-camps.png" alt="Donor Camps" width="100%" />
-<img src="./docs/screenshots/donor-history.png" alt="Donor History" width="100%" />
-<img src="./docs/screenshots/donor-notifications.png" alt="Donor Notifications" width="100%" />
-<img src="./docs/screenshots/donor-profile.png" alt="Donor Profile" width="100%" />
-<img src="./docs/screenshots/donor-requests.png" alt="Donor Requests" width="100%" />
+![Donor Appointments](docs/screenshots/donor-appointments.png)
+![Donor Camps](docs/screenshots/donor-camps.png)
+![Donor History](docs/screenshots/donor-history.png)
+![Donor Notifications](docs/screenshots/donor-notifications.png)
+![Donor Profile](docs/screenshots/donor-profile.png)
+![Donor Requests](docs/screenshots/donor-requests.png)
 
 ### Hospital UI
-<img src="./docs/screenshots/hospital-analytics.png" alt="Hospital Analytics" width="100%" />
-<img src="./docs/screenshots/hospital-appointments.png" alt="Hospital Appointments" width="100%" />
-<img src="./docs/screenshots/hospital-camps.png" alt="Hospital Camps" width="100%" />
-<img src="./docs/screenshots/hospital-inventory.png" alt="Hospital Inventory" width="100%" />
-<img src="./docs/screenshots/hospital-profile.png" alt="Hospital Profile" width="100%" />
-<img src="./docs/screenshots/hospital-requests.png" alt="Hospital Requests" width="100%" />
+![Hospital Analytics](docs/screenshots/hospital-analytics.png)
+![Hospital Appointments](docs/screenshots/hospital-appointments.png)
+![Hospital Camps](docs/screenshots/hospital-camps.png)
+![Hospital Inventory](docs/screenshots/hospital-inventory.png)
+![Hospital Profile](docs/screenshots/hospital-profile.png)
+![Hospital Requests](docs/screenshots/hospital-requests.png)
 
 ### Admin UI
-<img src="./docs/screenshots/admin-camps.png" alt="Admin Camps" width="100%" />
-<img src="./docs/screenshots/admin-users.png" alt="Admin Users" width="100%" />
+![Admin Camps](docs/screenshots/admin-camps.png)
+![Admin Users](docs/screenshots/admin-users.png)
